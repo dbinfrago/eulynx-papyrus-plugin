@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.gmf.runtime.common.ui.services.parserProviders">
+      <ParserProvider
+            class="com.eulynx.papyrus.specification.parsers.CustomTransitionParserProvider">
+         <Priority
+               name="Highest">
+         </Priority>
+      </ParserProvider>
+      <ParserProvider
+            class="com.eulynx.papyrus.specification.timing.DurationLinkParserProvider">
+         <Priority
+               name="Highest">
+         </Priority>
+      </ParserProvider>
+   </extension>
+
+   <extension
+         point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders">
+      <editpartProvider
+            class="com.eulynx.papyrus.specification.frame.DiagramFrameEditPartProvider">
+         <Priority
+               name="Highest">
+         </Priority>
+      </editpartProvider>
+      <editpartProvider
+            class="com.eulynx.papyrus.specification.statemachine.width.WidthAwareTransitionGuardEditPartProvider">
+         <Priority
+               name="Highest">
+         </Priority>
+      </editpartProvider>
+      <editpartProvider
+            class="com.eulynx.papyrus.specification.statemachine.region.NamedRegionCompartmentEditPartProvider">
+         <Priority
+               name="Highest">
+         </Priority>
+      </editpartProvider>
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="com.eulynx.papyrus.specification.richtext.RichTextReferenceSyncStartup">
+      </startup>
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="com.eulynx.papyrus.specification.category"
+            name="EULYNX">
+      </category>
+      <view
+            id="com.eulynx.papyrus.specification.richTextPreview"
+            name="Rich Text Preview"
+            class="com.eulynx.papyrus.specification.richtext.RichTextPreviewView"
+            category="com.eulynx.papyrus.specification.category">
+      </view>
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="com.eulynx.papyrus.specification.addDiagramFrame"
+            name="Add Diagram Frame"
+            categoryId="org.eclipse.ui.category.edit">
+      </command>
+      <command
+            id="com.eulynx.papyrus.specification.addDurationLink"
+            name="Add Duration Between Events"
+            categoryId="org.eclipse.ui.category.edit">
+      </command>
+      <command
+            id="com.eulynx.papyrus.specification.editDurationArrow"
+            name="Edit Duration Arrow"
+            categoryId="org.eclipse.ui.category.edit">
+      </command>
+      <command
+            id="com.eulynx.papyrus.specification.hideMultiplicity"
+            name="Hide Multiplicity"
+            categoryId="org.eclipse.ui.category.edit">
+      </command>
+      <command
+            id="com.eulynx.papyrus.specification.showMultiplicity"
+            name="Show Multiplicity"
+            categoryId="org.eclipse.ui.category.edit">
+      </command>
+      <command
+            id="com.eulynx.papyrus.specification.hideType"
+            name="Hide Type"
+            categoryId="org.eclipse.ui.category.edit">
+      </command>
+      <command
+            id="com.eulynx.papyrus.specification.showType"
+            name="Show Type"
+            categoryId="org.eclipse.ui.category.edit">
+      </command>
+      <command
+            id="com.eulynx.papyrus.specification.selectDisplayedStereotypes"
+            name="Select Displayed Stereotypes..."
+            categoryId="org.eclipse.ui.category.edit">
+      </command>
+      <command
+            id="com.eulynx.papyrus.specification.editRequirement"
+            name="Edit Requirement..."
+            categoryId="org.eclipse.ui.category.edit">
+      </command>
+      <command
+            id="com.eulynx.papyrus.specification.editMessageLabel"
+            name="Edit Message Label..."
+            categoryId="org.eclipse.ui.category.edit">
+      </command>
+      <command
+            id="com.eulynx.papyrus.specification.editComment"
+            name="Edit Comment..."
+            categoryId="org.eclipse.ui.category.edit">
+      </command>
+      <command
+            id="com.eulynx.papyrus.specification.syncStateMachineRequirements"
+            name="Sync State Machine to Requirements..."
+            categoryId="org.eclipse.ui.category.edit">
+      </command>
+      <command
+            id="com.eulynx.papyrus.specification.syncPackageStateMachines"
+            name="Sync State Machines in Package to Requirements..."
+            categoryId="org.eclipse.ui.category.edit">
+      </command>
+      <command
+            id="com.eulynx.papyrus.specification.editTransition"
+            name="Edit Transition..."
+            categoryId="org.eclipse.ui.category.edit">
+      </command>
+      <command
+            id="com.eulynx.papyrus.specification.editStateBehavior"
+            name="Edit State Behavior..."
+            categoryId="org.eclipse.ui.category.edit">
+      </command>
+      <command
+            id="com.eulynx.papyrus.specification.editOperation"
+            name="Edit Operation Body..."
+            categoryId="org.eclipse.ui.category.edit">
+      </command>
+      <command
+            id="com.eulynx.papyrus.specification.setLabelWidth"
+            name="Set Label Width..."
+            categoryId="org.eclipse.ui.category.edit">
+      </command>
+      <command
+            id="com.eulynx.papyrus.specification.exportAllDiagrams"
+            name="Export All Diagrams..."
+            categoryId="org.eclipse.ui.category.edit">
+      </command>
+      <command
+            id="com.eulynx.papyrus.specification.exportTransitionInformation"
+            name="Export Transition Information..."
+            categoryId="org.eclipse.ui.category.edit">
+      </command>
+      <command
+            id="com.eulynx.papyrus.specification.wrapName"
+            name="Wrap Name"
+            categoryId="org.eclipse.ui.category.edit">
+      </command>
+      <command
+            id="com.eulynx.papyrus.specification.unwrapName"
+            name="Unwrap Name"
+            categoryId="org.eclipse.ui.category.edit">
+      </command>
+      <command
+            id="com.eulynx.papyrus.specification.exportRequirements"
+            name="Export Requirements..."
+            categoryId="org.eclipse.ui.category.edit">
+      </command>
+      <command
+            id="com.eulynx.papyrus.specification.exportTables"
+            name="Export Tables..."
+            categoryId="org.eclipse.ui.category.edit">
+      </command>
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            commandId="com.eulynx.papyrus.specification.addDiagramFrame"
+            class="com.eulynx.papyrus.specification.frame.AddDiagramFrameHandler">
+      </handler>
+      <handler
+            commandId="com.eulynx.papyrus.specification.addDurationLink"
+            class="com.eulynx.papyrus.specification.timing.AddDurationLinkHandler">
+      </handler>
+      <handler
+            commandId="com.eulynx.papyrus.specification.editDurationArrow"
+            class="com.eulynx.papyrus.specification.timing.EditDurationArrowHandler">
+      </handler>
+      <handler
+            commandId="com.eulynx.papyrus.specification.hideMultiplicity"
+            class="com.eulynx.papyrus.specification.parsers.HideMultiplicityHandler">
+      </handler>
+      <handler
+            commandId="com.eulynx.papyrus.specification.showMultiplicity"
+            class="com.eulynx.papyrus.specification.parsers.ShowMultiplicityHandler">
+      </handler>
+      <handler
+            commandId="com.eulynx.papyrus.specification.hideType"
+            class="com.eulynx.papyrus.specification.parsers.HideTypeHandler">
+      </handler>
+      <handler
+            commandId="com.eulynx.papyrus.specification.showType"
+            class="com.eulynx.papyrus.specification.parsers.ShowTypeHandler">
+      </handler>
+      <handler
+            commandId="com.eulynx.papyrus.specification.selectDisplayedStereotypes"
+            class="com.eulynx.papyrus.specification.parsers.SelectDisplayedStereotypesHandler">
+      </handler>
+      <handler
+            commandId="com.eulynx.papyrus.specification.editRequirement"
+            class="com.eulynx.papyrus.specification.requirement.EditRequirementHandler">
+      </handler>
+      <handler
+            commandId="com.eulynx.papyrus.specification.editMessageLabel"
+            class="com.eulynx.papyrus.specification.message.EditMessageLabelHandler">
+      </handler>
+      <handler
+            commandId="com.eulynx.papyrus.specification.editComment"
+            class="com.eulynx.papyrus.specification.comment.EditCommentHandler">
+      </handler>
+      <handler
+            commandId="com.eulynx.papyrus.specification.syncStateMachineRequirements"
+            class="com.eulynx.papyrus.specification.statemachine.SyncStateMachineRequirementsHandler">
+      </handler>
+      <handler
+            commandId="com.eulynx.papyrus.specification.syncPackageStateMachines"
+            class="com.eulynx.papyrus.specification.statemachine.SyncPackageStateMachinesHandler">
+      </handler>
+      <handler
+            commandId="com.eulynx.papyrus.specification.editTransition"
+            class="com.eulynx.papyrus.specification.statemachine.ui.EditTransitionHandler">
+      </handler>
+      <handler
+            commandId="com.eulynx.papyrus.specification.editStateBehavior"
+            class="com.eulynx.papyrus.specification.statemachine.ui.EditStateBehaviorHandler">
+      </handler>
+      <handler
+            commandId="com.eulynx.papyrus.specification.editOperation"
+            class="com.eulynx.papyrus.specification.operation.EditOperationHandler">
+      </handler>
+      <handler
+            commandId="com.eulynx.papyrus.specification.setLabelWidth"
+            class="com.eulynx.papyrus.specification.statemachine.width.SetLabelWidthHandler">
+      </handler>
+      <handler
+            commandId="com.eulynx.papyrus.specification.exportAllDiagrams"
+            class="com.eulynx.papyrus.specification.export.ExportAllDiagramsHandler">
+      </handler>
+      <handler
+            commandId="com.eulynx.papyrus.specification.exportTransitionInformation"
+            class="com.eulynx.papyrus.specification.export.ExportTransitionInformationHandler">
+      </handler>
+      <handler
+            commandId="com.eulynx.papyrus.specification.wrapName"
+            class="com.eulynx.papyrus.specification.parsers.WrapNameHandler">
+      </handler>
+      <handler
+            commandId="com.eulynx.papyrus.specification.unwrapName"
+            class="com.eulynx.papyrus.specification.parsers.UnwrapNameHandler">
+      </handler>
+      <handler
+            commandId="com.eulynx.papyrus.specification.exportRequirements"
+            class="com.eulynx.papyrus.specification.export.ExportRequirementsHandler">
+      </handler>
+      <handler
+            commandId="com.eulynx.papyrus.specification.exportTables"
+            class="com.eulynx.papyrus.specification.export.ExportTablesHandler">
+      </handler>
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu?after=additions">
+         <command
+               commandId="com.eulynx.papyrus.specification.addDiagramFrame"
+               label="Add Diagram Frame">
+         </command>
+         <command
+               commandId="com.eulynx.papyrus.specification.addDurationLink"
+               label="Add Duration Between Events...">
+         </command>
+         <command
+               commandId="com.eulynx.papyrus.specification.editDurationArrow"
+               label="Edit Duration Arrow...">
+         </command>
+         <command
+               commandId="com.eulynx.papyrus.specification.hideMultiplicity"
+               label="Hide Multiplicity">
+         </command>
+         <command
+               commandId="com.eulynx.papyrus.specification.showMultiplicity"
+               label="Show Multiplicity">
+         </command>
+         <command
+               commandId="com.eulynx.papyrus.specification.hideType"
+               label="Hide Type">
+         </command>
+         <command
+               commandId="com.eulynx.papyrus.specification.showType"
+               label="Show Type">
+         </command>
+         <command
+               commandId="com.eulynx.papyrus.specification.selectDisplayedStereotypes"
+               label="Select Displayed Stereotypes...">
+         </command>
+         <command
+               commandId="com.eulynx.papyrus.specification.editRequirement"
+               label="Edit Requirement...">
+         </command>
+         <command
+               commandId="com.eulynx.papyrus.specification.editMessageLabel"
+               label="Edit Message Label...">
+         </command>
+         <command
+               commandId="com.eulynx.papyrus.specification.editComment"
+               label="Edit Comment...">
+         </command>
+         <command
+               commandId="com.eulynx.papyrus.specification.syncStateMachineRequirements"
+               label="Sync State Machine to Requirements...">
+         </command>
+         <command
+               commandId="com.eulynx.papyrus.specification.editTransition"
+               label="Edit Transition...">
+         </command>
+         <command
+               commandId="com.eulynx.papyrus.specification.editStateBehavior"
+               label="Edit State Behavior...">
+         </command>
+         <command
+               commandId="com.eulynx.papyrus.specification.editOperation"
+               label="Edit Operation Body...">
+         </command>
+         <command
+               commandId="com.eulynx.papyrus.specification.setLabelWidth"
+               label="Set Label Width...">
+         </command>
+         <command
+               commandId="com.eulynx.papyrus.specification.exportAllDiagrams"
+               label="Export All Diagrams...">
+         </command>
+         <command
+               commandId="com.eulynx.papyrus.specification.exportTransitionInformation"
+               label="Export Transition Information...">
+         </command>
+         <command
+               commandId="com.eulynx.papyrus.specification.wrapName"
+               label="Wrap Name">
+         </command>
+         <command
+               commandId="com.eulynx.papyrus.specification.unwrapName"
+               label="Unwrap Name">
+         </command>
+      </menuContribution>
+      <menuContribution
+            locationURI="popup:org.eclipse.papyrus.views.modelexplorer.modelexplorer.popup?after=additions">
+         <command
+               commandId="com.eulynx.papyrus.specification.syncPackageStateMachines"
+               label="Sync State Machines in Package to Requirements...">
+         </command>
+         <command
+               commandId="com.eulynx.papyrus.specification.exportRequirements"
+               label="Export Requirements...">
+         </command>
+         <command
+               commandId="com.eulynx.papyrus.specification.exportTables"
+               label="Export Tables...">
+         </command>
+         <command
+               commandId="com.eulynx.papyrus.specification.editOperation"
+               label="Edit Operation Body...">
+         </command>
+      </menuContribution>
+   </extension>
+
+</plugin>
