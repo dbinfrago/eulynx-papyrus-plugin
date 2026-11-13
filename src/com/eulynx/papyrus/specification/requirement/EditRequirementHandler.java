@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright DB InfraGO AG and contributors
+// SPDX-License-Identifier: Apache-2.0
+
 package com.eulynx.papyrus.specification.requirement;
 
 import org.eclipse.core.commands.ExecutionEvent;
