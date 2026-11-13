@@ -5,10 +5,12 @@ package com.eulynx.papyrus.specification.richtext;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -45,6 +47,9 @@ public final class RichTextReferenceSync extends TriggerListener {
 
 	@Override
 	protected Command trigger(TransactionalEditingDomain domain, Notification notification) {
+		if (Objects.equals(notification.getOldValue(), notification.getNewValue())) {
+			return null;
+		}
 		ResourceSet resourceSet = domain.getResourceSet();
 		if (resourceSet == null) {
 			return null;
@@ -52,14 +57,17 @@ public final class RichTextReferenceSync extends TriggerListener {
 		return new RecordingCommand(domain, "Refresh Rich Text References") { //$NON-NLS-1$
 			@Override
 			protected void doExecute() {
-				refreshAll(resourceSet);
+				refreshAll(domain, resourceSet);
 			}
 		};
 	}
 
-	private static void refreshAll(ResourceSet resourceSet) {
+	private static void refreshAll(TransactionalEditingDomain domain, ResourceSet resourceSet) {
 		List<Resource> resources = new ArrayList<>(resourceSet.getResources());
 		for (Resource resource : resources) {
+			if (!isWritable(domain, resource)) {
+				continue;
+			}
 			TreeIterator<EObject> contents = resource.getAllContents();
 			while (contents.hasNext()) {
 				EObject content = contents.next();
@@ -76,6 +84,16 @@ public final class RichTextReferenceSync extends TriggerListener {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Only workspace and file resources are user models; {@code pathmap:} and
+	 * {@code platform:/plugin} libraries and profiles are read-only, and writing
+	 * to them aborts the whole transaction.
+	 */
+	private static boolean isWritable(TransactionalEditingDomain domain, Resource resource) {
+		URI uri = resource.getURI();
+		return uri != null && (uri.isPlatformResource() || uri.isFile()) && !domain.isReadOnly(resource);
 	}
 
 	/** Guard / change- or time-expression of a transition with live references ({@link TextReferences}). */
