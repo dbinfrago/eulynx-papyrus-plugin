@@ -21,10 +21,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
@@ -86,6 +84,7 @@ import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 
 import com.eulynx.papyrus.specification.richtext.RichTextReferenceUtil;
+import com.eulynx.papyrus.specification.xml.SecureXml;
 
 /**
  * "Export Requirements..." command (Model Explorer): exports the content of the
@@ -235,9 +234,7 @@ public class ExportRequirementsHandler extends AbstractHandler {
 	 */
 	private static Document buildReqIfDocument(List<Package> roots, int[] counts, Map<String, byte[]> imageAttachments)
 			throws Exception {
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		factory.setNamespaceAware(true);
-		DocumentBuilder builder = factory.newDocumentBuilder();
+		DocumentBuilder builder = SecureXml.newDocumentBuilder();
 		Document doc = builder.newDocument();
 
 		Element reqIf = doc.createElementNS(REQIF_NS, "REQ-IF"); //$NON-NLS-1$
@@ -1418,9 +1415,7 @@ public class ExportRequirementsHandler extends AbstractHandler {
 			// stripping patterns above, so this can run at any point in the pipeline.
 			text = text.replace("\t", TAB_REPLACEMENT); //$NON-NLS-1$
 
-			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-			factory.setNamespaceAware(true);
-			DocumentBuilder builder = factory.newDocumentBuilder();
+			DocumentBuilder builder = SecureXml.newDocumentBuilder();
 			String wrapped = "<reqif-xhtml:div xmlns:reqif-xhtml=\"" + XHTML_NS + "\">" + text //$NON-NLS-1$ //$NON-NLS-2$
 					+ "</reqif-xhtml:div>"; //$NON-NLS-1$
 			Document parsed = builder.parse(new InputSource(new StringReader(wrapped)));
@@ -1463,8 +1458,7 @@ public class ExportRequirementsHandler extends AbstractHandler {
 	 */
 	private static void writeReqifZ(Document document, Map<String, byte[]> imageAttachments, File outputFile)
 			throws Exception {
-		TransformerFactory transformerFactory = TransformerFactory.newInstance();
-		Transformer transformer = transformerFactory.newTransformer();
+		Transformer transformer = SecureXml.newTransformer();
 		transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8"); //$NON-NLS-1$
 		transformer.setOutputProperty(OutputKeys.INDENT, "yes"); //$NON-NLS-1$
 		transformer.setOutputProperty(OutputKeys.STANDALONE, "yes"); //$NON-NLS-1$
