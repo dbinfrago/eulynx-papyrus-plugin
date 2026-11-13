@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: EULYNX Papyrus Specification Tools
 Bundle-SymbolicName: com.eulynx.papyrus.specification;singleton:=true
 Bundle-Version: 1.0.1.qualifier
-Bundle-Vendor: EULYNX
+Bundle-Vendor: DB InfraGO AG
 Bundle-License: Apache-2.0
 Bundle-Copyright: Copyright DB InfraGO AG and contributors
 Require-Bundle: org.eclipse.swt;bundle-version="[3.130.0,4.0.0)",
