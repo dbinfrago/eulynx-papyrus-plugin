@@ -14,7 +14,6 @@ import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.papyrus.infra.gmfdiag.menu.handlers.AbstractDiagramHandler;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.Region;
 import org.eclipse.uml2.uml.StateMachine;
 import org.eclipse.ui.handlers.HandlerUtil;
@@ -41,12 +40,11 @@ public class SyncStateMachineRequirementsHandler extends AbstractDiagramHandler 
 		}
 
 		StateMachineRequirementSync sync = new StateMachineRequirementSync();
-		Package container = sync.resolveContainerPackage(stateMachine);
 		TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(stateMachine);
 		domain.getCommandStack().execute(new RecordingCommand(domain, "Sync State Machine to Requirements") { //$NON-NLS-1$
 			@Override
 			protected void doExecute() {
-				sync.sync(stateMachine, container);
+				sync.sync(stateMachine, sync.resolveContainerPackage(stateMachine));
 			}
 		});
 
