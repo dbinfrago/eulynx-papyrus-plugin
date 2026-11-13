@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
+<!--
+   SPDX-FileCopyrightText: Copyright DB InfraGO AG and contributors
+   SPDX-License-Identifier: Apache-2.0
+-->
 <plugin>
    <extension
          point="org.eclipse.gmf.runtime.common.ui.services.parserProviders">
