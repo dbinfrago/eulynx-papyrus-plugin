@@ -42,6 +42,12 @@ Download `com.eulynx.papyrus.specification_<version>.jar` from the
 [releases](https://github.com/dbinfrago/eulynx-papyrus-plugin/releases), copy
 it into `<papyrus>/dropins/` and restart Papyrus.
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) and the
+[Code of Conduct](CODE_OF_CONDUCT.md). Report vulnerabilities as described in
+[SECURITY.md](SECURITY.md).
+
 ## Release
 
 Push a tag `v<version>`. The `build` workflow builds that version and attaches
@@ -49,5 +55,6 @@ the jar to a GitHub release.
 
 ## Licence
 
-Apache-2.0, see [LICENSES/Apache-2.0.txt](LICENSES/Apache-2.0.txt). The
-project is [REUSE](https://reuse.software/) compliant.
+Copyright DB InfraGO AG and contributors. Licensed under the
+[Apache License 2.0](LICENSE); see also [NOTICE](NOTICE). The project is
+[REUSE](https://reuse.software/) compliant.
