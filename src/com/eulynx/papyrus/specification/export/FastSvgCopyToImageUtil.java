@@ -7,7 +7,6 @@ import java.io.OutputStream;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
@@ -20,6 +19,8 @@ import org.eclipse.gmf.runtime.diagram.ui.render.clipboard.DiagramSVGGenerator;
 import org.eclipse.gmf.runtime.diagram.ui.render.util.CopyToImageUtil;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.w3c.dom.Element;
+
+import com.eulynx.papyrus.specification.xml.SecureXml;
 
 /**
  * {@link CopyToImageUtil} whose SVG export skips a pointless, expensive step.
@@ -75,7 +76,7 @@ public class FastSvgCopyToImageUtil extends CopyToImageUtil {
 			try {
 				root.setAttributeNS(null, "viewBox", viewBox.x + " " + viewBox.y + " " + viewBox.width + " " //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 						+ viewBox.height);
-				Transformer transformer = TransformerFactory.newInstance().newTransformer();
+				Transformer transformer = SecureXml.newTransformer();
 				transformer.setOutputProperty(OutputKeys.METHOD, "xml"); //$NON-NLS-1$
 				transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8"); //$NON-NLS-1$
 				transformer.setOutputProperty(OutputKeys.INDENT, "yes"); //$NON-NLS-1$
