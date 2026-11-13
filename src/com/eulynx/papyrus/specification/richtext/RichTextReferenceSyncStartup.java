@@ -4,10 +4,12 @@
 package com.eulynx.papyrus.specification.richtext;
 
 import java.util.Collections;
-import java.util.IdentityHashMap;
 import java.util.Set;
+import java.util.WeakHashMap;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.papyrus.infra.core.services.ServiceException;
 import org.eclipse.papyrus.infra.core.services.ServicesRegistry;
 import org.eclipse.papyrus.infra.ui.editor.IMultiDiagramEditor;
 import org.eclipse.ui.IEditorReference;
@@ -34,8 +36,9 @@ import org.eclipse.ui.PlatformUI;
  */
 public class RichTextReferenceSyncStartup implements IStartup {
 
+	/** Weak, so the editing domains of closed editors can be garbage-collected. */
 	private static final Set<TransactionalEditingDomain> REGISTERED = Collections
-			.newSetFromMap(new IdentityHashMap<>());
+			.newSetFromMap(new WeakHashMap<>());
 
 	@Override
 	public void earlyStartup() {
@@ -116,13 +119,18 @@ public class RichTextReferenceSyncStartup implements IStartup {
 		}
 		try {
 			ServicesRegistry registry = ((IMultiDiagramEditor) part).getServicesRegistry();
+			if (registry == null) {
+				return;
+			}
 			TransactionalEditingDomain domain = registry.getService(TransactionalEditingDomain.class);
 			if (domain != null && REGISTERED.add(domain)) {
 				domain.addResourceSetListener(new RichTextReferenceSync());
 			}
-		} catch (Exception e) {
+		} catch (ServiceException e) {
 			// Editor not fully initialized yet (ServicesRegistry not populated) - a
 			// later partActivated event retries, so this is safe to swallow.
+		} catch (Exception e) {
+			Platform.getLog(RichTextReferenceSyncStartup.class).error("Cannot register rich-text reference sync", e); //$NON-NLS-1$
 		}
 	}
 }
